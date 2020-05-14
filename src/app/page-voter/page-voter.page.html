@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Voter Panel</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="logout()">
+          Logout <!--<ion-icon name="arrow-back"></ion-icon>-->
+        </ion-button>
+  </ion-buttons>
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div *ngIf="is_loading" class="loading">
+        <div class="center-loading">
+          <div class="loading-text">
+              <label>Loading...</label>
+          </div>
+          <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        </div>
+         
+      </div>
+
+
+<div class="voting-content">
+    <div *ngIf="err_message.length!=0" class="err_message">
+        {{err_message}}
+</div>
+    <div class="form">
+         <div class="top">
+            <h2>Election tunisie 2019</h2>
+            <p class="wisely">Choose wisely</p>
+            <div *ngIf="chosen_parti!=null" class="choosed">
+                You have chosen: {{ chosen_parti.name }}
+            </div>
+            <div *ngIf="chosen_parti==null" class="choosed">
+                You haven't chosen yet
+            </div>
+
+         </div>
+        
+        <div class="partis">
+            <div *ngFor="let element of parti_set;let i = index" class="inputGroup">
+                <input (click)="chose_this(element)"  id="{{'radio-'+i}}" name="radio" type="radio"/>
+                <label for="{{'radio-'+i}}">{{element.name}}</label>
+              </div>
+        </div> <!-- end partis -->
+        <div class="voting-button">
+          <span (click)="voter()">Voter</span>
+        </div>
+      
+      </div><!-- end form -->
+    
+</div><!-- end content -->
+ 
+
+</ion-content>

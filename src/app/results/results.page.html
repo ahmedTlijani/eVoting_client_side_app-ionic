@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Results</ion-title>
+    <ion-buttons slot="end">
+        <ion-button color="primary" (click)="logout()">
+            Logout <!--<ion-icon name="arrow-back"></ion-icon>-->
+          </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="is_loading" class="loading">
+    <div class="center-loading">
+      <div class="loading-text">
+          <label>Loading...</label>
+      </div>
+      <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+     
+  </div>
+
+  <div class="results">
+      <div *ngIf="err_message.length!=0" class="err_message">
+          {{err_message}}
+      </div>
+
+    <div class="title">
+      Election Results Tunisia - 2019
+    </div>
+    <div class="expire_time">
+        <div class="expire_date">
+            Election End : {{ deadline | date:short }}
+        </div> 
+        <div class="counter">
+         Days: {{days}}, hours: {{hours}}, minutes: {{minutes}}, seconds: {{seconds}}
+        </div>
+    </div>
+    
+
+    <div class="reslt" *ngFor="let element of parties_stat">
+      <div class="parti_name">
+        {{ element.name }}
+      </div>
+      <div class="progress-bar">
+        <span class="bar">
+          <span [ngStyle]="{'width': element.percentage +'%'}" class="progress"></span>
+        </span>
+      </div>
+      <div class="info">
+        {{element.qte}} Electeur / {{ element.percentage }}%
+      </div>
+    </div> <!-- reslt end -->
+    
+    <div class="bot_">
+      Total Electeurs: {{ total_eleteur }}
+    </div>
+
+  </div>
+
+
+
+
+</ion-content>
